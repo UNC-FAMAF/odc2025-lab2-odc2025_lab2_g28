@@ -31,6 +31,7 @@ loop0:
 	sub x2,x2,1	   // Decrementar contador Y
 	cbnz x2,loop1  // Si no es la última fila, salto
 
+
 	mov x0, x21 // framebuffer base
 	mov x1, 326
 	mov x2, 285
@@ -84,6 +85,42 @@ loop0:
 	bl dibujar_rectangulo      // Llamada funcion
 	mov x0, x20                // Reestablezco x0
 
+
+	mov x0, x20           // Reestablezco x0
+
+	//------------------ Linea entre montañas y camino ---------------
+	mov x20, x0                // Guarda la dirección base del framebuffer en x20
+	movz x12, 0x31, lsl 16     // Color linea
+	movk x12, 0x3B38, lsl 0
+	mov x2, 0                  // Columna
+	mov x3, 411                // Fila
+	mov x4, 640                // Ancho
+	mov x5, 1                  // Alto
+	bl dibujar_rectangulo      // Llamada a funcion dibujar_rectangulos
+	mov x0, x20                // Reestablezco x0
+	
+	//------------------ Camino (parte clara) ---------------
+	mov x20, x0                // Guarda la dirección base del framebuffer en x20
+	movz x12, 0x83, lsl 16     // Color camino (parte clara)
+	movk x12, 0x7E87, lsl 0
+	mov x2, 0                  // Columna
+	mov x3, 412                // Fila
+	mov x4, 640                // Ancho
+	mov x5, 39                 // Alto
+	bl dibujar_rectangulo      // Llamada a funcion dibujar_rectangulos
+	mov x0, x20                // Reestablezco x0
+
+	//------------------ Camino (parte oscura) ---------------
+	mov x0, x20
+	movz x12, 0x62, lsl 16     // Color camino (parte oscura) 
+	movk x12, 0x5B6D, lsl 0
+	mov x2, 0                  // Columna
+	mov x3, 451                // Fila
+	mov x4, 640                // Ancho
+	mov x5, 29                 // Alto
+	bl dibujar_rectangulo      // Llamada a funcion dibujar_rectangulos
+	mov x0, x20                // Reestablezco x0
+	
 
 	//---------------------------------------------------------------
 	// Infinite Loop
