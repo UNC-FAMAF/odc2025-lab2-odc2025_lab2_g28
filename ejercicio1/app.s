@@ -11,7 +11,8 @@
     .extern dibujar_nubes
     .extern dibujar_camino
     .extern dibujar_rectangulo   
-
+	.extern dibujar_montaña
+	
 main:
 	mov x20, x0       // Backup real del framebuffer base
 	mov x21, x0       // x21 lo vamos a usar para escribir el fondo
@@ -34,6 +35,10 @@ loop0:
 mov x0, x20     // Base framebuffer
 
 bl dibujar_nubes
+
+mov x0, x0     // Restaurar base framebuffer para siguiente llamada
+
+bl dibujar_montaña
 
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
