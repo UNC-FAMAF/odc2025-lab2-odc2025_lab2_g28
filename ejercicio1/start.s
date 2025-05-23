@@ -1,4 +1,4 @@
-	.text
+.text
 	.org 0x80000
 
 	// Setup Frame Buffer
@@ -135,4 +135,3 @@ FB_SIZE:
 
 	.word 0x00000000 // $0 (End Tag)
 FB_STRUCT_END:
-
