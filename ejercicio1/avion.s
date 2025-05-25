@@ -6,7 +6,6 @@
 	.equ SCREEN_MAX_Y,          (SCREEN_HEIGHT - 1) // 479
 
     .global avion
-    .extern triangulo
     .extern dibujar_triangulo_dir
     .extern dibujar_paralelogramo_con_borde
     .extern ventanas_avion
@@ -14,12 +13,6 @@
 avion:
 
     stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
-//guardamos colores
-    //movz w12, #0x5B6D // color borde
-    //movk w12, #0x62, lsl 16
-
-    //movz w13, #0xFFFF // color (blanco)
-    //movk w13, #0xFFFF, lsl 16
 
 //cuerpo avion
     mov x0, x0
