@@ -17,7 +17,7 @@ montaña1_clara:
 
     mov x21, x0              // Guardar base framebuffer al inicio
 
-    //PARTE ILUMINADA (verde claro)
+//PARTE ILUMINADA (verde claro)
     
     mov x1, 125              // centro x
     mov x2, 401              // centro y
@@ -36,17 +36,13 @@ montaña1_clara:
     mov x6, 10               // desplazamiento
     bl dibujar_paralelogramo
 
-    movz x5, 0x69, lsl 16    // Color Verde claro 0x69BD2F
-    movk x5, 0xBD2F, lsl 0
     mov x1, 404              // x inicial
     mov x2, 379              // y inicial
     mov x3, 20               // ancho del paralelogramo
     mov x4, 23               // alto
     mov x6, -5               // desplazamiento
     bl dibujar_paralelogramo
-
-    movz x5, 0x69, lsl 16
-    movk x5, 0xBD2F, lsl 0
+ 
     mov x1, 400              // x inicial
     mov x2, 379              // y inicial
     mov x3, 20               // ancho del paralelogramo
@@ -54,8 +50,6 @@ montaña1_clara:
     mov x6, 5                // desplazamiento
     bl dibujar_paralelogramo
 
-    movz x5, 0x69, lsl 16
-    movk x5, 0xBD2F, lsl 0
     mov x1, 640              // x inicial
     mov x2, 353              // y inicial
     mov x3, 160              // ancho del paralelogramo
@@ -67,8 +61,6 @@ montaña1_clara:
     // RELLENO DE FORMA
 
     //"triangulo"
-    movz x5, 0x69, lsl 16
-    movk x5, 0xBD2F, lsl 0
     mov x1, 402              // x inicial
     mov x2, 382              // y inicial
     mov x3, 33               // ancho del paralelogramo
@@ -76,8 +68,6 @@ montaña1_clara:
     mov x6, -5               // desplazamiento
     bl dibujar_paralelogramo
 
-    movz x5, 0x69, lsl 16    // Color Verde claro 0x69BD2F
-    movk x5, 0xBD2F, lsl 0
     mov x1, 420              // x inicial
     mov x2, 385              // y inicial
     mov x3, 30               // ancho del paralelogramo
@@ -85,8 +75,6 @@ montaña1_clara:
     mov x6, -5               // desplazamiento
     bl dibujar_paralelogramo
 
-    movz x5, 0x69, lsl 16    // Color Verde claro 0x69BD2F
-    movk x5, 0xBD2F, lsl 0
     mov x1, 433              // x inicial
     mov x2, 388              // y inicial
     mov x3, 32               // ancho del paralelogramo
@@ -95,7 +83,7 @@ montaña1_clara:
     bl dibujar_paralelogramo
 
     //"ladera de colina"
-	movz x12, 0x69, lsl 16   // Color Linea  
+	movz x12, 0x69, lsl 16   // Color Verde claro 0x69BD2F  
 	movk x12, 0xBD2F, lsl 0
 	mov x2, 185              // x inicial (columna)
 	mov x3, 400              // y inicial (fila)
@@ -103,7 +91,7 @@ montaña1_clara:
 	mov x5, 12               // Alto
 	bl dibujar_rectangulo
 
-    movz x5, 0x69, lsl 16
+    movz x5, 0x69, lsl 16    // Color Verde claro 0x69BD2F
     movk x5, 0xBD2F, lsl 0
     mov x1, 128              // x inicial
     mov x2, 370              // y inicial
@@ -112,8 +100,6 @@ montaña1_clara:
     mov x6, 3                // desplazamiento
     bl dibujar_paralelogramo
 
-    movz x5, 0x69, lsl 16    // Color Verde claro 0x69BD2F
-    movk x5, 0xBD2F, lsl 0
     mov x1, 620              // x inicial
     mov x2, 380              // y inicial
     mov x3, 240              // ancho del paralelogramo
@@ -122,13 +108,9 @@ montaña1_clara:
     bl dibujar_paralelogramo
     
 
-
-
     ldr x21, [sp, #0]        // Restaura x21
     ldp x29, x30, [sp, #8]   // Restaura FP y LR
     add sp, sp, #24          // Ajusta SP de vuelta
-
-
 
 
     ret
