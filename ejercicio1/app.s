@@ -12,6 +12,8 @@
     .extern dibujar_camino
     .extern dibujar_rectangulo   
 	.extern dibujar_montaña
+	.extern sombra_nubes
+	.extern nubes_celestes
 	
 main:
 	mov x20, x0       // Backup real del framebuffer base
@@ -34,7 +36,15 @@ loop0:
 
 mov x0, x20     // Base framebuffer
 
+bl nubes_celestes
+
+mov x0, x20     // Base framebuffer
+
 bl dibujar_nubes
+
+mov x0, x20     // Base framebuffer
+
+bl sombra_nubes
 
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
@@ -43,7 +53,6 @@ bl dibujar_montaña
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
 bl dibujar_camino
-
 
 // Infinite Loop
 

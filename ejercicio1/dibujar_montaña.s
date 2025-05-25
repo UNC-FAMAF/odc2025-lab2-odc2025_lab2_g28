@@ -8,6 +8,7 @@
     .globl dibujar_montaña
     .extern dibujar_circulo
     .extern dibujar_rectangulo
+    .extern dibujar_paralelogramo
 
 dibujar_montaña:
 
