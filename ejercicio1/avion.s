@@ -8,12 +8,18 @@
     .global avion
     .extern triangulo
     .extern dibujar_triangulo_dir
-    .extern dibujar_triangulo_derecha
+    .extern dibujar_paralelogramo_con_borde
     .extern ventanas_avion
     
 avion:
 
     stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+//guardamos colores
+    //movz w12, #0x5B6D // color borde
+    //movk w12, #0x62, lsl 16
+
+    //movz w13, #0xFFFF // color (blanco)
+    //movk w13, #0xFFFF, lsl 16
 
 //cuerpo avion
     mov x0, x0
@@ -27,22 +33,23 @@ avion:
     movz w13, #0xFFFF // color (blanco)
     movk w13, #0xFFFF, lsl 16
 
-    movz w12, #0x0000 // color borde
+    movz w12, #0x5B6D // color borde
+    movk w12, #0x62, lsl 16
 
     bl dibujar_paralelogramo_con_borde 
      
     mov x0, x0
     bl ventanas_avion
 
-//linea naranja:
+//linea color:
     mov x0, x0
     mov x1, #205         // x inicial
     mov x2, #120         // y inicial
     mov x3, #90          // ancho
     mov x4, #5           // alto
     mov x6, #-1          // inclinacion
-    movz w5, #0x6902     // color relleno
-    movk w5, #0xB7, lsl 16
+    movz w5, #0x0077     // color relleno
+    movk w5, #0xFF, lsl 16
 
     bl dibujar_paralelogramo
     
@@ -51,13 +58,22 @@ avion:
     mov x2, #235        //x inicial
     mov x3, #117        //y inicial
     mov x4, #35         // ancho de la base
-    mov x6, #5          // grosor borde
     mov x5, #2          //triangulo hacia la izquierda
+    mov x6, #5          // grosor borde
+    movz w13, 0x62, lsl 16     // Color borde (parte oscura) 
+	movk w13, 0x5B6D, lsl 0
+
+    bl dibujar_triangulo_dir
+
+    mov x0, x0
+    mov x2, #245        //x inicial
+    mov x3, #122        //y inicial
+    mov x4, #21         // ancho de la base
+    mov x5, #2          //triangulo hacia la izquierda
+    mov x6, #5          // grosor borde
     movz w13, #0xFFFF   // color (blanco)
-    movk w13, #0xFFFF, lsl 16
-
-    movz w12, #0x0000 // color borde
-
+    movk w13, #0xFF, lsl 16
+    
     bl dibujar_triangulo_dir
 
 //dibujar cola 
@@ -70,21 +86,31 @@ avion:
     mov x17, #5            // grosor del borde
     movz w13, #0xFFFF      //color relleno
     movk w13, #0xFFFF, lsl 16
-    movz w12, #0x0000      // color borde
+
+    movz w12, #0x5B6D // color borde
+    movk w12, #0x62, lsl 16
 
     bl dibujar_paralelogramo_con_borde
 
+    mov x0, x0
     mov x2, #305           //x inicial
     mov x3, #98            //y inicial
     mov x4, #25            // ancho de la base
-    //mov x5, #50          // alto triangulo
-    movz w12, #0x0000      // color borde
-    movz w13, #0x8300      //color relleno
-    movk w13, #0xE6, lsl 16   
-    mov x6, #5             // grosor borde
-    mov x5, #0             //triangulo hacia arriba
-
+    mov x5, #0
+    movz w13, #0x5B6D // color borde
+    movk w13, #0x62, lsl 16
     bl dibujar_triangulo_dir
+
+    mov x0, x0
+    mov x2, #312           //x inicial
+    mov x3, #102            //y inicial
+    mov x4, #15            // ancho de la base
+    movz w13, #0x0077      //color relleno
+    movk w13, #0xFF, lsl 16   
+    //mov x6, #5             // grosor borde
+    mov x5, #0             //triangulo hacia arriba
+    bl dibujar_triangulo_dir
+
 
 dibujar_paralelogramo_con_borde:
     mov w20, w12   // respaldo del color del borde

@@ -5,9 +5,10 @@
 .globl dibujar_triangulo_dir
 
 dibujar_triangulo_dir:
+    
     stp x29, x30, [sp, #-16]!   // Prologo
     mov x29, sp
-
+    mov w20, w12
     mov x7, #0      // fila o columna segun orientación
 
 loop_principal:
@@ -35,7 +36,7 @@ loop_principal:
     b fin
 
 //-------------------------------------
-// △ Triángulo hacia arriba (vértice abajo)
+//Triángulo hacia arriba (vértice abajo)
 tri_arriba:
     mov x10, x4
     sub x10, x10, x7   // y = y_inicial + (altura - fila actual)
@@ -47,7 +48,7 @@ tri_arriba:
     b pintar_linea_horizontal
 
 //-------------------------------------
-// ▽ Triángulo hacia abajo (vértice arriba)
+// Triángulo hacia abajo (vértice arriba)
 tri_abajo:
     add x10, x3, x7
     add x11, x2, x9
@@ -56,7 +57,7 @@ tri_abajo:
     b pintar_linea_horizontal
 
 //-------------------------------------
-// ◁ Triángulo hacia la izquierda
+// Triángulo hacia la izquierda
 tri_izq:
     mov x10, x4
     sub x10, x10, x7
@@ -68,7 +69,7 @@ tri_izq:
     b pintar_linea_vertical
 
 //-------------------------------------
-// ▷ Triángulo hacia la derecha
+// Triángulo hacia la derecha
 tri_der:
     add x10, x2, x7
     add x11, x3, x9
@@ -85,30 +86,10 @@ linea_h:
     cmp x14, x12
     bge siguiente
 
-    // color: borde si en los extremos o en las primeras/últimas filas
-    mov w15, w13        // por defecto: relleno
-
     cmp x6, #0
     beq pintar_pixel_h
 
-    // borde superior/inferior
-    cmp x7, x6
-    blt borde_h
-    sub x16, x4, x6
-    cmp x7, x16
-    bge borde_h
-
-    // borde lateral
-    cmp x14, x6
-    blt borde_h
-    sub x17, x12, x6
-    cmp x14, x17
-    bge borde_h
-
     b pintar_pixel_h
-
-borde_h:
-    mov w15, w12
 
 pintar_pixel_h:
     add x18, x11, x14   // x = x11 + i
@@ -121,7 +102,7 @@ pintar_pixel_h:
     lsl x21, x21, #2
 
     add x22, x0, x21
-    str w15, [x22]
+    str w13, [x22]
 
     add x14, x14, #1
     b linea_h
@@ -134,28 +115,10 @@ linea_v:
     cmp x14, x12
     bge siguiente
 
-    mov w15, w13
+    //mov w15, w13
 
     cmp x6, #0
     beq pintar_pixel_v
-
-    // borde vertical/horizontal
-    cmp x7, x6
-    blt borde_v
-    sub x16, x4, x6
-    cmp x7, x16
-    bge borde_v
-
-    cmp x14, x6
-    blt borde_v
-    sub x17, x12, x6
-    cmp x14, x17
-    bge borde_v
-
-    b pintar_pixel_v
-
-borde_v:
-    mov w15, w12
 
 pintar_pixel_v:
     add x18, x10, x14   // x = base + i
@@ -168,7 +131,7 @@ pintar_pixel_v:
     lsl x21, x21, #2
 
     add x22, x0, x21
-    str w15, [x22]
+    str w13, [x22]
 
     add x14, x14, #1
     b linea_v
