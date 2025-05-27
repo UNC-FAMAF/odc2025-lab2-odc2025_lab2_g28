@@ -17,6 +17,10 @@ dibujar_montaña:
 
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
+bl montaña_gris
+
+mov x0, x0     // Restaurar base framebuffer para siguiente llamada
+
 bl montaña1_clara
 
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
