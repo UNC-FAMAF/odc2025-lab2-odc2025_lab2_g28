@@ -14,6 +14,7 @@
 	.extern dibujar_montaña
 	.extern sombra_nubes
 	.extern nubes_celestes
+	.extern dibujar_triangulo
 	
 main:
 	mov x20, x0       // Backup real del framebuffer base
@@ -33,6 +34,7 @@ loop0:
 	cbnz x1,loop0  // Si no terminó la fila, salto
 	sub x2,x2,1	   // Decrementar contador Y
 	cbnz x2,loop1  // Si no es la última fila, salto
+
 
 mov x0, x20     // Base framebuffer
 
