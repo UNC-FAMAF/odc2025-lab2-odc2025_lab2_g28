@@ -1,0 +1,104 @@
+
+Configuración de la Memoria
+
+Nombre           Origen             Longitud           Atributos
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Guión del enlazador y mapa de memoria
+
+LOAD app.o
+LOAD nubes.o
+LOAD primitivas.o
+LOAD start.o
+LOAD ventanas.o
+                0x0000000000080000                . = 0x80000
+
+.text           0x0000000000080000    0x906ec
+ *(.text.boot)
+ .text.boot     0x0000000000080000    0x100c8 start.o
+                0x0000000000080000                _start
+ *(.text*)
+ .text          0x00000000000900c8      0x100 app.o
+                0x00000000000900c8                main
+ .text          0x00000000000901c8      0x41c nubes.o
+                0x00000000000901c8                nubes
+ .text          0x00000000000905e4      0x108 primitivas.o
+                0x00000000000905e4                dibujar_circulo
+                0x0000000000090694                dibujar_rectangulo
+ .text          0x00000000000906ec    0x80000 start.o
+ .text          0x00000000001106ec        0x0 ventanas.o
+
+.iplt           0x00000000001106ec        0x0
+ .iplt          0x00000000001106ec        0x0 app.o
+
+.rela.dyn       0x00000000001106f0        0x0
+ .rela.iplt     0x00000000001106f0        0x0 app.o
+ .rela.text.boot
+                0x00000000001106f0        0x0 app.o
+
+.data           0x00000000001106ec        0x0
+ .data          0x00000000001106ec        0x0 app.o
+ .data          0x00000000001106ec        0x0 nubes.o
+ .data          0x00000000001106ec        0x0 primitivas.o
+ .data          0x00000000001106ec        0x0 start.o
+ .data          0x00000000001106ec        0x0 ventanas.o
+
+.igot.plt       0x00000000001106f0        0x0
+ .igot.plt      0x00000000001106f0        0x0 app.o
+
+.bss            0x00000000001106ec        0x0
+ *(.bss*)
+ .bss           0x00000000001106ec        0x0 app.o
+ .bss           0x00000000001106ec        0x0 nubes.o
+ .bss           0x00000000001106ec        0x0 primitivas.o
+ .bss           0x00000000001106ec        0x0 start.o
+ .bss           0x00000000001106ec        0x0 ventanas.o
+
+.bss            0x00000000001106ec        0x4
+                0x00000000001106f0                . = ALIGN (0x10)
+ *fill*         0x00000000001106ec        0x4 
+                0x00000000001106f0                __bss_start = .
+ *(.bss .bss.*)
+ *(COMMON)
+                0x00000000001106f0                __bss_end = .
+                0x00000000001106f0                _end = .
+                0x0000000000000000                __bss_size = ((__bss_end - __bss_start) >> 0x3)
+OUTPUT(kernel8.elf elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_line     0x0000000000000000      0x28d
+ .debug_line    0x0000000000000000       0x78 app.o
+ .debug_line    0x0000000000000078      0x141 nubes.o
+ .debug_line    0x00000000000001b9       0x81 primitivas.o
+ .debug_line    0x000000000000023a       0x53 start.o
+
+.debug_info     0x0000000000000000       0xb8
+ .debug_info    0x0000000000000000       0x2e app.o
+ .debug_info    0x000000000000002e       0x2e nubes.o
+ .debug_info    0x000000000000005c       0x2e primitivas.o
+ .debug_info    0x000000000000008a       0x2e start.o
+
+.debug_abbrev   0x0000000000000000       0x50
+ .debug_abbrev  0x0000000000000000       0x14 app.o
+ .debug_abbrev  0x0000000000000014       0x14 nubes.o
+ .debug_abbrev  0x0000000000000028       0x14 primitivas.o
+ .debug_abbrev  0x000000000000003c       0x14 start.o
+
+.debug_aranges  0x0000000000000000       0xc0
+ .debug_aranges
+                0x0000000000000000       0x30 app.o
+ .debug_aranges
+                0x0000000000000030       0x30 nubes.o
+ .debug_aranges
+                0x0000000000000060       0x30 primitivas.o
+ .debug_aranges
+                0x0000000000000090       0x30 start.o
+
+.debug_str      0x0000000000000000       0x6f
+ .debug_str     0x0000000000000000       0x52 app.o
+ .debug_str     0x0000000000000052        0x8 nubes.o
+                                         0x54 (tamaño antes de la relajación)
+ .debug_str     0x000000000000005a        0xd primitivas.o
+                                         0x59 (tamaño antes de la relajación)
+ .debug_str     0x0000000000000067        0x8 start.o
+                                         0x54 (tamaño antes de la relajación)

@@ -56,6 +56,10 @@ mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
 bl dibujar_camino
 
+mov x0, x0
+
+bl avion
+
 // Infinite Loop
 
 InfLoop:

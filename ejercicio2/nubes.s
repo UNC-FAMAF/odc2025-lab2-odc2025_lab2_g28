@@ -1,0 +1,325 @@
+	.equ SCREEN_WIDTH, 		640
+	.equ SCREEN_HEIGHT, 		480
+	.equ BITS_PER_PIXEL,  	32
+
+	.equ GPIO_BASE,      0x3f200000
+	.equ GPIO_GPFSEL0,   0x00
+	.equ GPIO_GPLEV0,    0x34
+
+	.globl nubes
+    .extern dibujar_circulo
+
+nubes:
+
+//------------------ NUBES MORADAS CLARO -----------------------
+
+    sub sp, sp, #24                     // Ajusta SP para 3 registros
+    stp x29, x30, [sp, #8]              // Guarda FP y LR en la pila
+    str x21, [sp, #0]                   // Guarda x21 en la pila
+
+    mov x21, x0                         // Guardar base framebuffer al inicio
+
+    mov x1, 330                         // centro x
+    mov x2, 150                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 350                         // centro x
+    mov x2, 165                         // centro y
+    mov x3, 25                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 310                         // centro x
+    mov x2, 165                         // centro y
+    mov x3, 25                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 375                         // centro x
+    mov x2, 170                         // centro y
+    mov x3, 10                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 285                         // centro x
+    mov x2, 170                         // centro y
+    mov x3, 10                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 385                         // centro x
+    mov x2, 190                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 275                         // centro x
+    mov x2, 190                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 265                         // centro x
+    mov x2, 210                         // centro y
+    mov x3, 30                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 395                         // centro x
+    mov x2, 210                         // centro y
+    mov x3, 30                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 235                         // centro x
+    mov x2, 200                         // centro y
+    mov x3, 10                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 425                         // centro x
+    mov x2, 200                         // centro y
+    mov x3, 10                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 200                         // centro x
+    mov x2, 220                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 460                         // centro x
+    mov x2, 220                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 230                         // centro x
+    mov x2, 240                         // centro y
+    mov x3, 30                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 430                         // centro x
+    mov x2, 240                         // centro y
+    mov x3, 30                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 330                         // centro x
+    mov x2, 245                         // centro y
+    mov x3, 70                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 230                         // centro x
+    mov x2, 280                         // centro y
+    mov x3, 60                          // radio
+    movz w4, 0x68AA         
+    movk w4, 0xFFA3, lsl 16             // Color morado
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+//------------------ NUBES ROSAS CLARAS  ----------------------------
+
+    mov x1, 485                         // centro x
+    mov x2, 210                         // centro y
+    mov x3, 15                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 510                         // centro x
+    mov x2, 210                         // centro y
+    mov x3, 15                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 540                         // centro x
+    mov x2, 240                         // centro y
+    mov x3, 30                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 400                         // centro x
+    mov x2, 250                         // centro y
+    mov x3, 35                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 450                         // centro x
+    mov x2, 300                         // centro y
+    mov x3, 65                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 480                         // centro x
+    mov x2, 250                         // centro y
+    mov x3, 45                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 370                         // centro x
+    mov x2, 300                         // centro y
+    mov x3, 45                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 325                         // centro x
+    mov x2, 300                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 530                         // centro x
+    mov x2, 300                         // centro y
+    mov x3, 45                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 570                         // centro x
+    mov x2, 250                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 630                         // centro x
+    mov x2, 270                         // centro y
+    mov x3, 45                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 610                         // centro x
+    mov x2, 220                         // centro y
+    mov x3, 20                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 590                         // centro x
+    mov x2, 280                         // centro y
+    mov x3, 45                          // radio
+    movz w4, 0x5F9D         
+    movk w4, 0xFFB1, lsl 16             // Color rosa
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+// -------------------- COLOR FINAL DEL CIELO -----------------------
+
+	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
+	movz x12, 0x4271     		        // Color cielo final
+	movk x12, 0xFFC0, lsl 16
+	mov x2, 200               	        // x inicial (columna)
+	mov x3, 300                	        // y inicial (fila)
+	mov x4, 640                	        // Ancho
+	mov x5, 200                         // Alto
+	bl dibujar_rectangulo      	        // Llamada función
+
+	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
+	movz x12, 0x4271     		        // Color cielo final
+	movk x12, 0xFFC0, lsl 16
+	mov x2, 200               	        // x inicial (columna)
+	mov x3, 290                	        // y inicial (fila)
+	mov x4, SCREEN_WIDTH                // Ancho
+	mov x5, 1                           // Alto
+	bl dibujar_rectangulo      	        // Llamada función
+
+	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
+	movz x12, 0x4271     		        // Color cielo final
+	movk x12, 0xFFC0, lsl 16
+	mov x2, 200               	        // x inicial (columna)
+	mov x3, 295                	        // y inicial (fila)
+	mov x4, SCREEN_WIDTH                // Ancho
+	mov x5, 3                           // Alto
+	bl dibujar_rectangulo      	        // Llamada función
+
+
+// --------------------- NUBES ROSA FUERTE --------------------
+
+    mov x1, 480                         // centro x
+    mov x2, 320                         // centro y
+    mov x3, 45                          // radio
+    movz W4, 0x4271     		        // Color cielo final
+	movk W4, 0xFFC0, lsl 16
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 520                         // centro x
+    mov x2, 300                         // centro y
+    mov x3, 20                          // radio
+    movz W4, 0x4271     		        // Color cielo final
+	movk W4, 0xFFC0, lsl 16
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+    mov x1, 480                         // centro x
+    mov x2, 320                         // centro y
+    mov x3, 45                          // radio
+    movz W4, 0x4271     		        // Color cielo final
+	movk W4, 0xFFC0, lsl 16
+    mov x0, x21                         // framebuffer base
+    bl dibujar_circulo
+
+
+    ldr x21, [sp, #0]                   // Restaura x21
+    ldp x29, x30, [sp, #8]              // Restaura FP y LR
+    add sp, sp, #24                     // Ajusta SP de vuelta
+
+    ret

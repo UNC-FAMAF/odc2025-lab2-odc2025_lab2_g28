@@ -1,5 +1,5 @@
 	.equ SCREEN_WIDTH, 		640
-	.equ SCREEN_HEIGH, 		480
+	.equ SCREEN_HEIGHT, 		480
 	.equ BITS_PER_PIXEL,  	32
 
 	.equ GPIO_BASE,      0x3f200000
@@ -7,47 +7,96 @@
 	.equ GPIO_GPLEV0,    0x34
 
 	.globl main
+	.extern dibujar_rectangulo
 
 main:
-	// x0 contiene la direccion base del framebuffer
- 	mov x20, x0	// Guarda la dirección base del framebuffer en x20
-	//---------------- CODE HERE ------------------------------------
+// x0 contiene la direccion base del framebuffer
 
-	movz x10, 0xC7, lsl 16
-	movk x10, 0x1585, lsl 00
+ 	mov x20, x0					// Guarda la dirección base del framebuffer en x20
+	mov x21, x0 				// Segundo backup del framebuffer
 
-	mov x2, SCREEN_HEIGH         // Y Size
+	movz x10, 0x62B7
+	movk x10, 0xFF6A, lsl 16
+
+	mov x2, SCREEN_HEIGHT      	// Y Size
 loop1:
-	mov x1, SCREEN_WIDTH         // X Size
+	mov x1, SCREEN_WIDTH      	// X Size
 loop0:
-	stur w10,[x0]  // Colorear el pixel N
-	add x0,x0,4	   // Siguiente pixel
-	sub x1,x1,1	   // Decrementar contador X
-	cbnz x1,loop0  // Si no terminó la fila, salto
-	sub x2,x2,1	   // Decrementar contador Y
-	cbnz x2,loop1  // Si no es la última fila, salto
 
-	// Ejemplo de uso de gpios
-	mov x9, GPIO_BASE
+// ------------- FONDO DEL CIELO --------------------
 
-	// Atención: se utilizan registros w porque la documentación de broadcom
-	// indica que los registros que estamos leyendo y escribiendo son de 32 bits
+	mov x0, x20
+	stur w10,[x20]  			// Colorear el pixel N
+	add x20,x20,4	   			// Siguiente pixel
+	sub x1,x1,1	   				// Decrementar contador X
+	cbnz x1,loop0  				// Si no terminó la fila, salto
+	sub x2,x2,1	   				// Decrementar contador Y
+	cbnz x2,loop1  				// Si no es la última fila, salto
 
-	// Setea gpios 0 - 9 como lectura
-	str wzr, [x9, GPIO_GPFSEL0]
+// ------------------ COLOR DE TRANSICIÓN DEL CIELO -------------------
 
-	// Lee el estado de los GPIO 0 - 31
-	ldr w10, [x9, GPIO_GPLEV0]
+	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
+	movz x12, 0x69C4     		// Color cielo intermedio
+	movk x12, 0xFF72, lsl 16
+	mov x2, 100                 // x inicial (columna)
+	mov x3, 100                	// y inicial (fila)
+	mov x4, 640                	// Ancho
+	mov x5, 200                 // Alto
+	bl dibujar_rectangulo      	// Llamada función
 
-	// And bit a bit mantiene el resultado del bit 2 en w10
-	and w11, w10, 0b10
+	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
+	movz x12, 0x69C4     		// Color cielo intermedio
+	movk x12, 0xFF72, lsl 16
+	mov x2, 97                  // x inicial (columna)
+	mov x3, 97                	// y inicial (fila)
+	mov x4, 640                	// Ancho
+	mov x5, 2                 	// Alto
+	bl dibujar_rectangulo      	// Llamada función
 
-	// w11 será 1 si había un 1 en la posición 2 de w10, si no será 0
-	// efectivamente, su valor representará si GPIO 2 está activo
-	lsr w11, w11, 1
+	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
+	movz x12, 0x69C4     		// Color cielo intermedio
+	movk x12, 0xFF72, lsl 16
+	mov x2, 85                  // x inicial (columna)
+	mov x3, 85                	// y inicial (fila)
+	mov x4, 640                	// Ancho
+	mov x5, 10                 	// Alto
+	bl dibujar_rectangulo      	// Llamada función
 
-	//---------------------------------------------------------------
-	// Infinite Loop
+	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
+	movz x12, 0x62B7     		// Color cielo intermedio
+	movk x12, 0xFF6A, lsl 16
+	mov x2, 105                 // x inicial (columna)
+	mov x3, 105               	// y inicial (fila)
+	mov x4, 640                	// Ancho
+	mov x5, 5                 	// Alto
+	bl dibujar_rectangulo      	// Llamada función
+
+	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
+	movz x12, 0x69C4     		// Color cielo intermedio
+	movk x12, 0xFF72, lsl 16
+	mov x2, 80                  // x inicial (columna)
+	mov x3, 80                	// y inicial (fila)
+	mov x4, 640                	// Ancho
+	mov x5, 2                 	// Alto
+	bl dibujar_rectangulo      	// Llamada función
+
+	mov x0, x21
+	bl nubes
+
+// ---------------------- COLOR BASE EDIFICIO ----------------------------
+
+	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
+	movz x12, 0x255B     		// Color azul oscuro 
+	movk x12, 0xFF25, lsl 16
+	mov x2, 0                  	// x inicial (columna)
+	mov x3, 0                	// y inicial (fila)
+	mov x4, 250             	// Ancho
+	mov x5, SCREEN_WIDTH        // Alto
+	bl dibujar_rectangulo      	// Llamada función
+
+//  
+
+// Infinite Loop
 
 InfLoop:
 	b InfLoop
