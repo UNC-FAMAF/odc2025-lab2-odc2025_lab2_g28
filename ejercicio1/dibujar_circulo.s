@@ -56,11 +56,6 @@ circulo_x_loop:
     cmp x6, SCREEN_MAX_Y
     b.gt skip_pixel
 
-    // Evitar pintar sobre el camino (y >= 412)
-    cmp x6, #412
-    b.ge skip_pixel
-
-
     // Dirección del píxel
     mov x8, SCREEN_WIDTH
     mul x7, x6, x8      // Calcula y_absoluta * ancho de pantalla

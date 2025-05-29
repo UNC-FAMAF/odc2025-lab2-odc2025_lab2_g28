@@ -8,6 +8,8 @@
 
 	.globl main
 	.extern dibujar_rectangulo
+	.extern nubes
+	.extern edificio
 
 main:
 // x0 contiene la direccion base del framebuffer
@@ -86,17 +88,19 @@ loop0:
 // ---------------------- COLOR BASE EDIFICIO ----------------------------
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz x12, 0x255B     		// Color azul oscuro 
-	movk x12, 0xFF25, lsl 16
+	movz x12, 0x264F     		// Color azul oscuro 
+	movk x12, 0xFF24, lsl 16
 	mov x2, 0                  	// x inicial (columna)
 	mov x3, 0                	// y inicial (fila)
 	mov x4, 250             	// Ancho
 	mov x5, SCREEN_WIDTH        // Alto
 	bl dibujar_rectangulo      	// Llamada función
 
-//  
+	mov x0, x21
+	bl edificio
 
 // Infinite Loop
 
 InfLoop:
 	b InfLoop
+	
