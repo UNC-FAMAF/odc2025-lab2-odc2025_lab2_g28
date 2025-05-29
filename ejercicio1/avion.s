@@ -51,7 +51,7 @@ avion:
     mov x2, #235        //x inicial
     mov x3, #117        //y inicial
     mov x4, #35         // ancho de la base
-    mov x5, #2          //triangulo hacia la izquierda
+    mov x5, #0          //triangulo hacia la izquierda
     mov x6, #5          // grosor borde
     movz w13, 0x62, lsl 16     // Color borde (parte oscura) 
 	movk w13, 0x5B6D, lsl 0
@@ -62,7 +62,7 @@ avion:
     mov x2, #245        //x inicial
     mov x3, #122        //y inicial
     mov x4, #21         // ancho de la base
-    mov x5, #2          //triangulo hacia la izquierda
+    mov x5, #0          //triangulo hacia la izquierda
     mov x6, #5          // grosor borde
     movz w13, #0xFFFF   // color (blanco)
     movk w13, #0xFF, lsl 16
@@ -103,6 +103,9 @@ avion:
     //mov x6, #5             // grosor borde
     mov x5, #0             //triangulo hacia arriba
     bl dibujar_triangulo_dir
+
+    ldp x29, x30, [sp], #16   // Restaurar FP y LR
+    ret
 
 
 dibujar_paralelogramo_con_borde:
@@ -171,6 +174,6 @@ siguiente_fila:
     b fila_loop
 
 fin:
-    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
-    
+    ldp x29, x30, [sp], #16   // Restaurar FP y LR
     ret
+
