@@ -15,7 +15,8 @@
 	.extern sombra_nubes
 	.extern nubes_celestes
 	.extern dibujar_triangulo
-	
+	.extern gato
+
 main:
 	mov x20, x0       // Backup real del framebuffer base
 	mov x21, x0       // x21 lo vamos a usar para escribir el fondo
@@ -55,6 +56,10 @@ bl dibujar_montaña
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
 bl dibujar_camino
+
+mov x0, x0     // Restaurar base framebuffer para siguiente llamada
+
+bl gato
 
 mov x0, x0
 
