@@ -7,6 +7,7 @@
 
 .global dibujar_circulo
 .globl dibujar_rectangulo
+.globl dibujar_paralelogramo
 
 // ---------------- FUNCIÓN PARA DIBUJAR UN CIRCULO ---------------------
 
@@ -99,47 +100,89 @@ circulo_hecho:
 // ------------------ FUNCIÓN PARA DIBUJAR UN RECTÁNGULO -----------------------
 
 dibujar_rectangulo:
+    stp x29, x30, [sp, #-16]!
+    mov x29, sp
 
-    stp x29, x30, [sp, #-16]!           // Guarda FP y LR y ajusta SP.
+    mov x6, 0            // fila = 0
+    mov x15, x0          // framebuffer base
 
-    mov x6, 0                           // fila 0
-    mov x15, x0                         // x15 = base framebuffer local
 fila_loop:
-    cmp x6, x5                          // si fila actual >= alto, salto
-    bge rect_done 
+    cmp x6, x4           // if fila >= alto
+    bge rect_done
 
-    mov x7, #0                          // columna 0
+    mov x7, 0            // columna = 0
+
 col_loop:
-    cmp x7, x4                          // si columna actual >= ancho, salto
+    cmp x7, x3           // if columna >= ancho
     bge siguiente_fila
 
-// Calcular coordenadas absolutas
+    add x8, x2, x6       // y = y_inicial + fila
+    add x9, x1, x7       // x = x_inicial + columna
 
-    add x8, x3, x6                      // y = y inicial + fila actual
-    add x9, x2, x7                      // x = x inicial + columna actual
+    mov x10, #SCREEN_WIDTH
+    mul x11, x8, x10
+    add x11, x11, x9
+    lsl x11, x11, #2     // offset * 4 bytes por pixel
 
-// offset = (y * SCREEN_WIDTH + x) * 4
+    add x12, x15, x11
+    str w5, [x12]        // Color correcto
 
-    mov x13, #SCREEN_WIDTH              // Cargar SCREEN_WIDTH
-    mul x10, x8, x13                    // x10 = y * SCREEN_WIDTH
-    add x10, x10, x9
-    lsl x10, x10, 2
-
-    add x11, x15, x10                   // dirección absoluta del pixel
-    str w12, [x11]                      // escribir color
-
-    add x7, x7, 1                       // columna actual++
+    add x7, x7, 1
     b col_loop
 
 siguiente_fila:
-    add x6, x6, 1                       // fila actual++
+    add x6, x6, 1
     b fila_loop
 
 rect_done:
+    ldp x29, x30, [sp], #16
+    ret
 
-// Restaura los registros que se guardaron
+// --------------- FUNCIÓN PARA DIBUJAR UN PARALELOGRAMO ----------------
 
-    ldp x29, x30, [sp], #16             // Restaura FP y LR y ajusta SP de vuelta.
+dibujar_paralelogramo:
+
+    stp x29, x30, [sp, -16]! // Guardar FP y LR
+    mov x7, 0               // fila actual
+    mov x8, x0               // x8 = framebuffer base (copia local)
+
+fila_loop1:
+    cmp x7, x4               // si fila >= alto, termina
+    bge paralelogramo_done
+
+    // Calcular desplazamiento horizontal
+    mul x9, x6, x7           // x9 = dx * fila
+
+    mov x10, 0              // columna actual
+columna_loop:
+    cmp x10, x3              // si columna >= ancho, siguiente fila
+    bge siguiente_fila1
+
+    // x = x inicial + columna + desplazamiento
+    add x11, x1, x10
+    add x11, x11, x9         // x desplazado
+
+    // y = y inicial + fila
+    add x12, x2, x7
+
+    // offset = (y * SCREEN_WIDTH + x) * 4
+    mov x13, SCREEN_WIDTH
+    mul x14, x12, x13
+    add x14, x14, x11
+    lsl x14, x14, 2
+
+    add x15, x8, x14
+    str w5, [x15]
+
+    add x10, x10, 1
+    b columna_loop
+
+siguiente_fila1:
+    add x7, x7, 1
+    b fila_loop1
+
+paralelogramo_done:
+    ldp x29, x30, [sp], 16
     
     ret
-    
+

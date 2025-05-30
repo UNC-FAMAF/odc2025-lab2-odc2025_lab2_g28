@@ -264,30 +264,30 @@ nubes:
 // -------------------- COLOR FINAL DEL CIELO -----------------------
 
 	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
-	movz x12, 0x4271     		        // Color cielo final
-	movk x12, 0xFFC0, lsl 16
-	mov x2, 200               	        // x inicial (columna)
-	mov x3, 300                	        // y inicial (fila)
-	mov x4, 640                	        // Ancho
-	mov x5, 200                         // Alto
+	movz w5, 0x4271     		        // Color cielo final
+	movk w5, 0xFFC0, lsl 16
+	mov x1, 200               	        // x inicial (columna)
+	mov x2, 300                	        // y inicial (fila)
+	mov x3, 640                	        // Ancho
+	mov x4, 200                         // Alto
 	bl dibujar_rectangulo      	        // Llamada función
 
 	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
-	movz x12, 0x4271     		        // Color cielo final
-	movk x12, 0xFFC0, lsl 16
-	mov x2, 200               	        // x inicial (columna)
-	mov x3, 290                	        // y inicial (fila)
-	mov x4, SCREEN_WIDTH                // Ancho
-	mov x5, 1                           // Alto
+	movz w5, 0x4271     		        // Color cielo final
+	movk w5, 0xFFC0, lsl 16
+	mov x1, 200               	        // x inicial (columna)
+	mov x2, 290                	        // y inicial (fila)
+	mov x3, SCREEN_WIDTH                // Ancho
+	mov x4, 1                           // Alto
 	bl dibujar_rectangulo      	        // Llamada función
 
 	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
-	movz x12, 0x4271     		        // Color cielo final
-	movk x12, 0xFFC0, lsl 16
-	mov x2, 200               	        // x inicial (columna)
-	mov x3, 295                	        // y inicial (fila)
-	mov x4, SCREEN_WIDTH                // Ancho
-	mov x5, 3                           // Alto
+	movz w5, 0x4271     		        // Color cielo final
+	movk w5, 0xFFC0, lsl 16
+	mov x1, 200               	        // x inicial (columna)
+	mov x2, 295                	        // y inicial (fila)
+	mov x3, SCREEN_WIDTH                // Ancho
+	mov x4, 3                           // Alto
 	bl dibujar_rectangulo      	        // Llamada función
 
 
