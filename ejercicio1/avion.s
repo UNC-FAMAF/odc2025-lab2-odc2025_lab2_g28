@@ -14,7 +14,7 @@ avion:
 
     stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
 
-//cuerpo avion
+//----------- CUERPO DEL AVION --------------
     mov x0, x0
     mov x2, #220         // x inicial
     mov x3, #100         // y inicial
@@ -34,7 +34,7 @@ avion:
     mov x0, x0
     bl ventanas_avion
 
-//linea color:
+//----------- LINEA DE COLOR --------------
     mov x0, x0
     mov x1, #205         // x inicial
     mov x2, #120         // y inicial
@@ -46,7 +46,7 @@ avion:
 
     bl dibujar_paralelogramo
     
-//dibujar ala
+//----------- ALA DEL AVION --------------
     mov x0, x0
     mov x2, #235        //x inicial
     mov x3, #117        //y inicial
@@ -64,12 +64,12 @@ avion:
     mov x4, #21         // ancho de la base
     mov x5, #0          //triangulo hacia la izquierda
     mov x6, #5          // grosor borde
-    movz w13, #0xFFFF   // color (blanco)
+    movz w13, #0xFFFF   // color relleno (blanco)
     movk w13, #0xFF, lsl 16
     
     bl dibujar_triangulo_dir
 
-//dibujar cola 
+//----------- COLA DEL AVION --------------
     mov x0, x0
     mov x2, #330           // x inicial
     mov x3, #78            // y inicial
@@ -90,7 +90,7 @@ avion:
     mov x3, #98            //y inicial
     mov x4, #25            // ancho de la base
     mov x5, #0
-    movz w13, #0x5B6D // color borde
+    movz w13, #0x5B6D       // color borde
     movk w13, #0x62, lsl 16
     bl dibujar_triangulo_dir
 
@@ -100,7 +100,6 @@ avion:
     mov x4, #15            // ancho de la base
     movz w13, #0x0077      //color relleno
     movk w13, #0xFF, lsl 16   
-    //mov x6, #5             // grosor borde
     mov x5, #0             //triangulo hacia arriba
     bl dibujar_triangulo_dir
 
@@ -111,13 +110,14 @@ avion:
 dibujar_paralelogramo_con_borde:
     mov w20, w12   // respaldo del color del borde
 
-    stp x29, x30, [sp, #-16]!   // Prologo
+    stp x29, x30, [sp, #-16]!   // Guardamos x29 y x30 y ajusta SP 
 
     mov x6, #0                  // fila = 0
     mov x15, x0                 // framebuffer base
 
 fila_loop:
-    cmp x6, x5
+    //Vemos si terminó de recorrer las filas para terminar o no
+    cmp x6, x5      
     bge fin
 
     // x13 = desplazamiento para esta fila
@@ -126,10 +126,13 @@ fila_loop:
     mov x7, #0                  // columna = 0
 
 col_loop:
-    cmp x7, x4
+    // determinamos si termino la columna y si avanzamos a la sigiente fila
+    cmp x7, x4      
     bge siguiente_fila
 
-    // Evaluar si es borde (fila o columna en borde)
+    // elegimos que color usar (borde o relleno)
+    
+    // evaluamos si es borde (fila o columna en borde)
     cmp x6, x17 // fila superior
     blt usar_color_borde
 
@@ -152,7 +155,7 @@ usar_color_borde:
     mov w14, w20
 
 pintar_pixel:
-    // Calcular coordenadas absolutas
+    // Calculo de coordenadas para pintar el pixel
     add x8, x3, x6          // y = y_inicial + fila
     add x9, x2, x7          // x = x_inicial + columna
     add x9, x9, x13         // aplicar desplazamiento
@@ -161,8 +164,9 @@ pintar_pixel:
     mov x10, #SCREEN_WIDTH
     mul x11, x8, x10
     add x11, x11, x9
-    lsl x11, x11, #2        // *4
+    lsl x11, x11, #2       
 
+    //framebuffer + offset para saber donde pintar (direccion del pixel)
     add x12, x15, x11
     str w14, [x12]
 

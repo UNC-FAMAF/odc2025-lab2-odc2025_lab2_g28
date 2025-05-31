@@ -16,14 +16,16 @@
 	.extern nubes_celestes
 	.extern dibujar_triangulo
 	.extern gato
+	.extern dibujar_cartel
+	.extern avion
 
 main:
 	mov x20, x0       // Backup real del framebuffer base
 	mov x21, x0       // x21 lo vamos a usar para escribir el fondo
 	//---------------- FONDO AZUL ------------------------------------
 
-	movz x10, 0x5B6E, lsl 16 // Color celeste para el cielo
-	movk x10, 0xE1, lsl 0 
+	movz x10, 0x5B, lsl 16 // Color celeste para el cielo
+	movk x10, 0x6EE1, lsl 0 
 
 	mov x2, SCREEN_HEIGHT         // Y Size
 loop1:
@@ -59,11 +61,15 @@ bl dibujar_camino
 
 mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
-bl gato
+bl gato			
 
-mov x0, x0
+mov x0, x0		// Restaurar base framebuffer para siguiente llamada
 
 bl avion
+
+mov x0, x0		// Restaurar base framebuffer para siguiente llamada
+
+bl dibujar_cartel
 
 // Infinite Loop
 
