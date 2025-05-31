@@ -2,13 +2,11 @@
 .equ SCREEN_HEIGHT,         480
 .equ BITS_PER_PIXEL,    32
 
-.equ GPIO_BASE,      0x3f200000
-.equ GPIO_GPFSEL0,   0x00
-.equ GPIO_GPLEV0,    0x34
-
 .globl edificio
 .extern dibujar_circulo
 .extern dibujar_rectangulo
+.extern dibujar_paralelogramo
+.extern dibujar_triangulo_dir
 
 edificio:
 
@@ -426,39 +424,113 @@ edificio:
     mov x4, 115                          // Alto 
     bl dibujar_rectangulo
 
-    // Rectángulo 30
+// -------------------------- LADRILLO MURO 1 -----------------------
+
     mov x0, x21                         // framebuffer base
-    movz w5, 0x2741                     // Color morado 
-    movk w5, 0xFF37, lsl 16
-    mov x1, 70                         // x inicial 
-    mov x2, 310                         // y inicial 
-    mov x3, 100                          // Ancho 
-    mov x4, 20                          // Alto 
+    movz w5, 0x1341                     // Color morado 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 580                         // x inicial 
+    mov x2, 200                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
     bl dibujar_rectangulo
 
-    // Rectángulo 31
     mov x0, x21                         // framebuffer base
-    movz w5, 0x2741                     // Color morado 
-    movk w5, 0xFF37, lsl 16
-    mov x1, 70                         // x inicial 
-    mov x2, 335                         // y inicial 
-    mov x3, 49                          // Ancho 
-    mov x4, 85                          // Alto 
+    movz w5, 0x1341                     // Color morado 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 574                         // x inicial 
+    mov x2, 206                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
     bl dibujar_rectangulo
 
-    // Rectángulo 32
     mov x0, x21                         // framebuffer base
-    movz w5, 0x2741                     // Color morado 
-    movk w5, 0xFF37, lsl 16
-    mov x1, 123                         // x inicial 
-    mov x2, 335                         // y inicial 
-    mov x3, 47                          // Ancho 
-    mov x4, 85                          // Alto 
+    movz w5, 0x1341                     // Color morado 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 586                         // x inicial 
+    mov x2, 206                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
     bl dibujar_rectangulo
 
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x1341                     // Color morado 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 580                         // x inicial 
+    mov x2, 212                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
+    bl dibujar_rectangulo
+
+// -------------------------- LADRILLO MURO 2 -----------------------
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x1341                     // Color AZUL 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 620                         // x inicial 
+    mov x2, 400                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
+    bl dibujar_rectangulo
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x1341                     // Color AZUL
+    movk w5, 0xFF13, lsl 16
+    mov x1, 614                         // x inicial 
+    mov x2, 406                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
+    bl dibujar_rectangulo
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x1341                     // Color AZUL 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 626                         // x inicial 
+    mov x2, 406                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
+    bl dibujar_rectangulo
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x1341                     // Color AZUL 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 620                         // x inicial 
+    mov x2, 412                         // y inicial 
+    mov x3, 10                          // Ancho 
+    mov x4, 5                          // Alto 
+    bl dibujar_rectangulo
+
+//------------------------- BORDE DEL MURO ------------------
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x1341                     // Color AZUL 
+    movk w5, 0xFF13, lsl 16
+    mov x1, 526                         // x inicial 
+    mov x2, 193                         // y inicial 
+    mov x3, 14                          // Ancho 
+    mov x4, 260                          // Alto 
+    bl dibujar_rectangulo
+
+    mov x0, x21
+    movk X13, 0x1341
+    movk X13, 0xFF13, lsl 16
+	mov x2, 525              // x inicial
+	mov x3, 195              // y inicial
+	mov x4, 15                // Ancho de la base
+	mov x6, 0                // Grosor borde
+	mov x5, 3                // Dirección
+	bl dibujar_triangulo_dir
+
+	mov x2, 525              // x inicial
+	mov x3, 449              // y inicial
+	mov x4, 15                // Ancho de la base
+	mov x6, 0                // Grosor borde
+	mov x5, 0                // Dirección
+	bl dibujar_triangulo_dir
 
     ldr x21, [sp, #0]                   // Restaura x21
     ldp x29, x30, [sp, #8]              // Restaura FP y LR
-    add sp, sp, #24                     // Ajusta SP de vuelta
+    add sp, sp, #24                     // Ajusta SP de vueltaS
 
     ret
+

@@ -10,6 +10,11 @@
 	.extern dibujar_rectangulo
 	.extern nubes
 	.extern edificio
+	.extern edificio_detalle
+	.extern animar_ventanas
+	.extern sombra
+	.extern farola
+	.extern luz
 
 main:
 
@@ -22,8 +27,8 @@ main:
  	mov x21, x0					// Guarda la dirección base del framebuffer en x20
 	mov x20, x21 				// Copia temporal
 
-	movz x10, 0x62B7
-	movk x10, 0xFF6A, lsl 16
+	movz x10, 0x449D
+	movk x10, 0xFF44, lsl 16
 
 	mov x2, SCREEN_HEIGHT      	// Y Size
 loop1:
@@ -43,8 +48,8 @@ loop0:
 // ------------------ COLOR DE TRANSICIÓN DEL CIELO -------------------
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x69C4     		// Color cielo intermedio
-	movk w5, 0xFF72, lsl 16
+	movz w5, 0x4AAA     		// Color cielo intermedio
+	movk w5, 0xFF4A, lsl 16
 	mov x1, 100                 // x inicial (columna)
 	mov x2, 100                	// y inicial (fila)
 	mov x3, 640                	// Ancho
@@ -52,8 +57,8 @@ loop0:
 	bl dibujar_rectangulo      	// Llamada función
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x69C4     		// Color cielo intermedio
-	movk w5, 0xFF72, lsl 16
+	movz w5, 0x4AAA     		// Color cielo intermedio
+	movk w5, 0xFF4A, lsl 16
 	mov x1, 97                  // x inicial (columna)
 	mov x2, 97                	// y inicial (fila)
 	mov x3, 640                	// Ancho
@@ -61,8 +66,8 @@ loop0:
 	bl dibujar_rectangulo      	// Llamada función
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x69C4     		// Color cielo intermedio
-	movk w5, 0xFF72, lsl 16
+	movz w5, 0x4AAA     		// Color cielo intermedio
+	movk w5, 0xFF4A, lsl 16
 	mov x1, 85                  // x inicial (columna)
 	mov x2, 85                	// y inicial (fila)
 	mov x3, 640                	// Ancho
@@ -70,8 +75,8 @@ loop0:
 	bl dibujar_rectangulo      	// Llamada función
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x62B7     		// Color cielo intermedio
-	movk w5, 0xFF6A, lsl 16
+	movz w5, 0x4AAA     		// Color cielo intermedio
+	movk w5, 0xFF4A, lsl 16
 	mov x1, 105                 // x inicial (columna)
 	mov x2, 105               	// y inicial (fila)
 	mov x3, 640                	// Ancho
@@ -79,8 +84,8 @@ loop0:
 	bl dibujar_rectangulo      	// Llamada función
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x69C4     		// Color cielo intermedio
-	movk w5, 0xFF72, lsl 16
+	movz w5, 0x4AAA     		// Color cielo intermedio
+	movk w5, 0xFF4A, lsl 16
 	mov x1, 80                  // x inicial (columna)
 	mov x2, 80                	// y inicial (fila)
 	mov x3, 640                	// Ancho
@@ -101,6 +106,17 @@ loop0:
 	mov x4, 100        // Alto
 	bl dibujar_rectangulo      	// Llamada función
 
+// --------------------- MURO DE LA DERECHA -----------------------
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x2E74                     // Color morado 
+    movk w5, 0xFF2E, lsl 16
+    mov x1, 540                         // x inicial 
+    mov x2, 180                         // y inicial 
+    mov x3, 100                          // Ancho 
+    mov x4, 280                          // Alto 
+    bl dibujar_rectangulo
+
 // ---------------------- COLOR BASE EDIFICIO ----------------------------
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
@@ -116,10 +132,22 @@ loop0:
 	bl edificio
 
 	mov x0, x21
-	bl edificio_detalle
+	bl sombra
 
 	mov x0, x21
-	bl animar_ventanas
+	bl edificio_detalle
+
+
+	mov x0, x21
+	bl luz
+
+	mov x0, x21
+	bl farola
+
+	mov x0, x21
+	//bl animar_ventanas
+
+
 
 // Infinite Loop
 
