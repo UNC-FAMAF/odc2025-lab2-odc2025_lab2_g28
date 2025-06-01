@@ -113,20 +113,41 @@ loop0:
     movk w5, 0xFF2E, lsl 16
     mov x1, 540                         // x inicial 
     mov x2, 180                         // y inicial 
-    mov x3, 100                          // Ancho 
-    mov x4, 280                          // Alto 
+    mov x3, 100                         // Ancho 
+    mov x4, 280                         // Alto 
     bl dibujar_rectangulo
+
+// ---------------------- EDIFICIO 2 (DE DETRÁS) ----------------------------
+
+	mov x0, x21                       	// Guarda la dirección base del framebuffer en x0
+	movz w5, 0x1341     		        // Color azul oscuro 
+	movk w5, 0xFF13, lsl 16
+	mov x1, 74                        	// x inicial (columna)
+	mov x2, 0                       	// y inicial (fila)
+	mov x3, 270                     	// Ancho
+	mov x4, 410              			// Alto
+	bl dibujar_rectangulo            	// Llamada función
+
+	//SOMBRA
+    movk x5, 0x16, lsl 16
+    movk x5, 0x164B
+	mov x1, 83                          // x inicial
+	mov x2, 409                         // y inicial
+	mov x3, 263                         // Ancho de la base
+	mov x4, 263                         // Alto
+	mov x6, -1
+	bl dibujar_paralelogramo
 
 // ---------------------- COLOR BASE EDIFICIO ----------------------------
 
-	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x264F     		// Color azul oscuro 
+	mov x0, x21                       	// Guarda la dirección base del framebuffer en x0
+	movz w5, 0x264F     	         	// Color azul oscuro 
 	movk w5, 0xFF24, lsl 16
-	mov x1, 0                  	// x inicial (columna)
-	mov x2, 0                	// y inicial (fila)
-	mov x3, 260             	// Ancho
-	mov x4, 420        			// Alto
-	bl dibujar_rectangulo      	// Llamada función
+	mov x1, 0                       	// x inicial (columna)
+	mov x2, 0                       	// y inicial (fila)
+	mov x3, 260                     	// Ancho
+	mov x4, 420        		        	// Alto
+	bl dibujar_rectangulo           	// Llamada función
 
 	mov x0, x21
 	bl edificio
@@ -137,12 +158,21 @@ loop0:
 	mov x0, x21
 	bl edificio_detalle
 
+	mov x0, x21
+	bl edificio2_detalle
+	
+	mov x0, x21
+	bl farola
 
 	mov x0, x21
 	bl luz
 
 	mov x0, x21
-	bl farola
+	bl spiderman
+	
+
+
+
 
 	mov x0, x21
 	//bl animar_ventanas
