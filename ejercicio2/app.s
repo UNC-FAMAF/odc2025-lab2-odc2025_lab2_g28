@@ -160,6 +160,8 @@ main:
 	mov x0, x21
 	bl farola
 
+	mov x0, x21
+	bl ventanas_y_puerta
 anim_loop:
 
 	mov x0, x21
@@ -173,21 +175,12 @@ anim_loop:
 	mov x0, x21
 	bl spiderman_quieto
 
-	mov x28, 0
-loop_kiss:
 	mov x0, x21
 	mov x25, 8
 	mov x26, -10
 	bl kitty_beso
 	
-    movz x2, 0x0B, lsl 16
-    movk x2, 0xA120, lsl 0
-    bl delay_us
-	    
-	add x28, x28, 1                    // Conteo
-    cmp x28, 60
-    blt loop_kiss                      // repetir si no llegó al final
-
+	bl animar_ventanas
 
 	mov x0, x21
 	mov x25, -17

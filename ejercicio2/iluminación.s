@@ -1,7 +1,7 @@
     .equ SCREEN_WIDTH, 		640
 	.equ SCREEN_HEIGHT, 		480
 	.equ BITS_PER_PIXEL,  	32
-
+.globl ventanas_y_puerta
 .globl animar_ventanas
 .globl sombra
 .globl farola
@@ -11,9 +11,126 @@
 
 .section .data
 .align 4
-DELAY_MICROSECONDS: .word 50000000
+DELAY_MICROSECONDS: .word 25000000
 
 // --------------------- LUCES DENTRO DEL EDIFICIO ---------------
+ventanas_y_puerta: 
+
+  	sub sp, sp, #64
+    stp x29, x30, [sp, #48] // Guarda FP y LR
+    stp x19, x20, [sp, #0]
+    stp x21, x22, [sp, #16]
+
+    mov x19, x0 			// x19: framebuffer base
+
+// ----------------- PUERTA DEL EDIFICIO ------------------
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x2741                     // Color morado 
+    movk w5, 0xFF37, lsl 16
+    mov x1, 70                         // x inicial 
+    mov x2, 310                         // y inicial 
+    mov x3, 100                          // Ancho 
+    mov x4, 20                          // Alto 
+    bl dibujar_rectangulo
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x2741                     // Color morado 
+    movk w5, 0xFF37, lsl 16
+    mov x1, 70                         // x inicial 
+    mov x2, 335                         // y inicial 
+    mov x3, 49                          // Ancho 
+    mov x4, 85                          // Alto 
+    bl dibujar_rectangulo
+
+    mov x0, x21                         // framebuffer base
+    movz w5, 0x2741                     // Color morado 
+    movk w5, 0xFF37, lsl 16
+    mov x1, 123                         // x inicial 
+    mov x2, 335                         // y inicial 
+    mov x3, 47                          // Ancho 
+    mov x4, 85                          // Alto 
+    bl dibujar_rectangulo
+// ------------------- VENTANAS --------------------------------------------------------
+    //Ventana arriba izquierda    
+    mov x0, x19                         // framebuffer base
+    mov x1, 65                          // centro x
+    mov x2, 50                          // centro y
+    mov x3, 19                          // radio
+    movz w4, 0x2741                     // Color amarillo
+    movk w4, 0x1037, lsl 16             
+    bl dibujar_circulo
+
+    mov x0, x19              // framebuffer
+	movz w5, 0x2741
+	movk w5, 0x1037, lsl 16              // color negro
+    mov x1, 47              // x
+    mov x2, 57             // y
+    mov x3, 37               // ancho
+    mov x4, 67              // alto
+    bl dibujar_rectangulo
+
+    //Ventana arriba derecha
+    mov x0, x19                         // framebuffer base
+    mov x1, 180                          // centro x
+    mov x2, 50                          // centro y
+    mov x3, 19                          // radio
+    movz w4, 0x2741                     // Color amarillo
+    movk w4, 0x1037, lsl 16             
+    bl dibujar_circulo
+
+    mov x0, x19              // framebuffer
+	movz w5, 0x2741
+	movk w5, 0x1037, lsl 16              // color negro
+    mov x1, 162              // x
+    mov x2, 57             // y
+    mov x3, 37               // ancho
+    mov x4, 67              // alto
+    bl dibujar_rectangulo
+
+    //Ventana abajo derecha
+    mov x0, x19                         // framebuffer base
+    mov x1, 180                          // centro x
+    mov x2, 210                          // centro y
+    mov x3, 19                          // radio
+    movz w4, 0x6745                     // Color amarillo
+    movk w4, 0x10A3, lsl 16             
+    bl dibujar_circulo
+
+    mov x0, x19              // framebuffer
+	movz w5, 0x6745
+	movk w5, 0x10A3, lsl 16              // color amarillo
+    mov x1, 162              // x
+    mov x2, 217             // y
+    mov x3, 37               // ancho
+    mov x4, 67              // alto
+    bl dibujar_rectangulo
+
+    //Ventana abajo izquierda
+    mov x0, x19                         // framebuffer base
+    mov x1, 65                          // centro x
+    mov x2, 210                          // centro y
+    mov x3, 19                          // radio
+    movz w4, 0x2741                     // Color amarillo
+    movk w4, 0x1037, lsl 16             
+    bl dibujar_circulo
+
+    mov x0, x19              // framebuffer
+	movz w5, 0x2741
+	movk w5, 0x1037, lsl 16              // color negro
+    mov x1, 47              // x
+    mov x2, 217             // y
+    mov x3, 37               // ancho
+    mov x4, 67              // alto
+    bl dibujar_rectangulo
+
+
+    ldr x25, [sp, #40]
+    ldp x23, x24, [sp, #32]
+    ldp x21, x22, [sp, #16]
+    ldp x19, x20, [sp, #0]
+    ldp x29, x30, [sp, #48]         // Restaura FP y LR
+    add sp, sp, #64                 // Ajusta SP de vuelta
+    ret
 
 animar_ventanas:
 
@@ -24,7 +141,7 @@ animar_ventanas:
 
 
     mov x19, x0 			// x19: framebuffer base
-
+    mov x28, 0
 loop_anim:
 
     // ----------- Luz encendida  PRIMER VENTANA -----------
@@ -75,8 +192,8 @@ loop_anim:
     bl dibujar_rectangulo
 
 // Cargar el valor de retardo desde la variable global
-    adrp x0, DELAY_MICROSECONDS 
-    ldr w0, [x0, #:lo12:DELAY_MICROSECONDS] 
+    adrp x2, DELAY_MICROSECONDS 
+    ldr w2, [x2, #:lo12:DELAY_MICROSECONDS] 
     bl delay_us 
 
     // ----------- Luz apagada -----------
@@ -127,11 +244,14 @@ loop_anim:
     bl dibujar_rectangulo
 
 // Cargar el valor de retardo nuevamente
-    adrp x0, DELAY_MICROSECONDS
-    ldr w0, [x0, #:lo12:DELAY_MICROSECONDS]
+    adrp x2, DELAY_MICROSECONDS
+    ldr w2, [x2, #:lo12:DELAY_MICROSECONDS]
     bl delay_us              // Llama a la función de delay basada en temporizador
 
-    b loop_anim
+    	    
+	add x28, x28, 1                    // Conteo
+    cmp x28, 2
+    blt loop_anim
 
 // (esto nunca se ejecuta, pero lo dejo por convención)
 restore_and_exit:
