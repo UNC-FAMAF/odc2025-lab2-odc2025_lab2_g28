@@ -53,7 +53,8 @@ spiderman_img:
 	mov x3, 6                	        // Ancho
 	mov x4, 6                 	        // Alto
 	bl dibujar_rectangulo      	        // Llamada función
-
+	
+	//Personaje
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
 	movk x5, 0x0F1E, lsl 0
 	add x1, x25, 266                    // x inicial (columna)
@@ -118,12 +119,28 @@ spiderman_img:
 	mov x4, 4                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
+	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 250                    // x inicial (columna)
+	add x2, x26, 18                	    // y inicial (fila)
+	mov x3, 38                	        // Ancho
+	mov x4, 1                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
 	movk x5, 0x0F1E, lsl 0
 	add x1, x25, 252                    // x inicial (columna)
 	add x2, x26, 18                	    // y inicial (fila)
 	mov x3, 34                	        // Ancho
 	mov x4, 2                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+
+	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 252                    // x inicial (columna)
+	add x2, x26, 20                	    // y inicial (fila)
+	mov x3, 34                	        // Ancho
+	mov x4, 1                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
@@ -140,6 +157,14 @@ spiderman_img:
 	add x2, x26, 22                	    // y inicial (fila)
 	mov x3, 30                	        // Ancho
 	mov x4, 4                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+
+	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 254                    // x inicial (columna)
+	add x2, x26, 26                	    // y inicial (fila)
+	mov x3, 30                	        // Ancho
+	mov x4, 1                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
@@ -198,12 +223,28 @@ spiderman_img:
 	mov x4, 14                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
+	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 256                    // x inicial (columna)
+	add x2, x26, 50                	    // y inicial (fila)
+	mov x3, 26                	        // Ancho
+	mov x4, 1                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
 	movk x5, 0x0F1E, lsl 0
 	add x1, x25, 258                    // x inicial (columna)
 	add x2, x26, 50                	    // y inicial (fila)
 	mov x3, 22                	        // Ancho
 	mov x4, 2                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+
+	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 258                    // x inicial (columna)
+	add x2, x26, 52                	    // y inicial (fila)
+	mov x3, 22                	        // Ancho
+	mov x4, 1                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
@@ -214,12 +255,28 @@ spiderman_img:
 	mov x4, 2                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
+	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 260                    // x inicial (columna)
+	add x2, x26, 54                	    // y inicial (fila)
+	mov x3, 18                	        // Ancho
+	mov x4, 1                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E
 	movk x5, 0x0F1E, lsl 0
 	add x1, x25, 264                    // x inicial (columna)
 	add x2, x26, 54                	    // y inicial (fila)
 	mov x3, 10                	        // Ancho
 	mov x4, 2                 	        // Alto
+    bl dibujar_rectangulo      	        // Llamada función
+	
+	movz x5, 0x13, lsl 16     		    // Color NAula0x131341
+	movk x5, 0x1341, lsl 0
+	add x1, x25, 264                    // x inicial (columna)
+	add x2, x26, 56                	    // y inicial (fila)
+	mov x3, 10                	        // Ancho
+	mov x4, 1                 	        // Alto
     bl dibujar_rectangulo      	        // Llamada función
 
 //Relleno gris----------------------------------------------------------------------------

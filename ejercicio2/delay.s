@@ -19,11 +19,11 @@ delay_us:
                           //  - Un valor MÁS ALTO hará el delay MÁS LARGO.
                           //  - Un valor MÁS BAJO hará el delay MÁS CORTO.
                           // Empieza con 10 o 50 para probar, luego ajusta finamente.
-    mul x0, x0, x1        // x0 = x0 (microsegundos deseados) * x1 (factor de calibración)
+    mul x2, x2, x1        // x0 = x0 (microsegundos deseados) * x1 (factor de calibración)
                           // Esto da el número total de "ciclos de bucle" a esperar.
 
 delay_loop:
-    subs x0, x0, #1       // Decrementa el contador. 'subs' actualiza los flags.
+    subs x2, x2, #1       // Decrementa el contador. 'subs' actualiza los flags.
     bne delay_loop        // Si x0 no es cero, continúa el bucle.
     ret                   // Retorna de la función cuando el contador llega a cero.
     

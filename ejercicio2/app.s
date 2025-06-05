@@ -22,30 +22,26 @@ main:
     stp x29, x30, [sp, #0] 		// Guarda Frame Pointer (FP) y Link Register (LR)
     add x29, sp, #0       		// Establece FP al inicio del stack frame
 
-// x0 contiene la direccion base del framebuffer
+	// x0 contiene la direccion base del framebuffer
 
  	mov x21, x0					// Guarda la dirección base del framebuffer en x20
 	mov x20, x21 				// Copia temporal
 
-	movz x10, 0x449D
-	movk x10, 0xFF44, lsl 16
+ 
+	// ------------- FONDO DEL CIELO --------------------
 
-	mov x2, SCREEN_HEIGHT      	// Y Size
-loop1:
-	mov x1, SCREEN_WIDTH      	// X Size
-loop0:
 
-// ------------- FONDO DEL CIELO --------------------
+    mov x0, x21                         // framebuffer base (pasado a dibujar_rectangulo)
+    movz w5, 0x449D                     // Color cielo (un celeste/azul claro)
+    movk w5, 0xFF44, lsl 16
+    mov x1, 0                          // x inicial
+    mov x2, 0                          // y inicial
+    mov x3, SCREEN_WIDTH               // Ancho
+    mov x4, SCREEN_HEIGHT              // Alto
+    bl dibujar_rectangulo               // Limpia toda la pantalla con el color del cielo
 
-	mov x0, x20
-	stur w10,[x20]  			// Colorear el pixel N
-	add x20,x20,4	   			// Siguiente pixel
-	sub x1,x1,1	   				// Decrementar contador X
-	cbnz x1,loop0  				// Si no terminó la fila, salto
-	sub x2,x2,1	   				// Decrementar contador Y
-	cbnz x2,loop1  				// Si no es la última fila, salto
 
-// ------------------ COLOR DE TRANSICIÓN DEL CIELO -------------------
+	// ------------------ COLOR DE TRANSICIÓN DEL CIELO -------------------
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
 	movz w5, 0x4AAA     		// Color cielo intermedio
@@ -95,7 +91,7 @@ loop0:
 	mov x0, x21
 	bl nubes
 
-// ------------------------ COLOR GRIS OSCURO PARA EL PISO -------------------
+	// ------------------------ COLOR GRIS OSCURO PARA EL PISO -------------------
 
 	mov x0, x21                	// Guarda la dirección base del framebuffer en x0
 	movz w5, 0x273E     		// Color azul oscuro 
@@ -106,7 +102,7 @@ loop0:
 	mov x4, 100        // Alto
 	bl dibujar_rectangulo      	// Llamada función
 
-// --------------------- MURO DE LA DERECHA -----------------------
+	// --------------------- MURO DE LA DERECHA -----------------------
 
     mov x0, x21                         // framebuffer base
     movz w5, 0x2E74                     // Color morado 
@@ -117,7 +113,7 @@ loop0:
     mov x4, 280                         // Alto 
     bl dibujar_rectangulo
 
-// ---------------------- EDIFICIO 2 (DE DETRÁS) ----------------------------
+	// ---------------------- EDIFICIO 2 (DE DETRÁS) ----------------------------
 
 	mov x0, x21                       	// Guarda la dirección base del framebuffer en x0
 	movz w5, 0x1341     		        // Color azul oscuro 
@@ -138,7 +134,7 @@ loop0:
 	mov x6, -1
 	bl dibujar_paralelogramo
 
-// ---------------------- COLOR BASE EDIFICIO ----------------------------
+	// ---------------------- COLOR BASE EDIFICIO ----------------------------
 
 	mov x0, x21                       	// Guarda la dirección base del framebuffer en x0
 	movz w5, 0x264F     	         	// Color azul oscuro 
@@ -164,23 +160,44 @@ loop0:
 	mov x0, x21
 	bl farola
 
-	mov x0, x21
-	bl luz
+anim_loop:
 
 	mov x0, x21
-	bl spiderman
+	mov x25, -17
+	mov x26, -18
+	bl hello_kitty
+
+	mov x0, x21
+	bl spiderman_baja
+
+	mov x0, x21
+	bl spiderman_quieto
+
+	mov x28, 0
+loop_kiss:
+	mov x0, x21
+	mov x25, 8
+	mov x26, -10
+	bl kitty_beso
+	
+    movz x2, 0x0B, lsl 16
+    movk x2, 0xA120, lsl 0
+    bl delay_us
+	    
+	add x28, x28, 1                    // Conteo
+    cmp x28, 60
+    blt loop_kiss                      // repetir si no llegó al final
+
+
+	mov x0, x21
+	mov x25, -17
+	mov x26, -18
+	bl hello_kitty
+
+	mov x0, x21
+	bl spiderman_sube
 	
 
-
-
-
-	mov x0, x21
-	//bl animar_ventanas
-
-
-
-// Infinite Loop
-
 InfLoop:
-	b InfLoop
+	b anim_loop
 	
