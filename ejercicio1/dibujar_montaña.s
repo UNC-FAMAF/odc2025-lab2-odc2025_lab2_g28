@@ -16,31 +16,17 @@ dibujar_montaña:
 
     mov x21, x0              // Guardar base framebuffer al inicio
 
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
-
 bl montaña_gris
-
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
 bl montaña1_clara
 
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
-
 bl montaña1_sombra1
-
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
 bl montaña1_sombra2
 
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
-
 bl montaña2_clara
 
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
-
 bl montaña2_sombra1
-
-mov x0, x0     // Restaurar base framebuffer para siguiente llamada
 
 bl montaña2_sombra2
 
