@@ -16,12 +16,17 @@ spiderman_baja:
     mov x20, x0                         // base framebuffer
 
     mov x25, 30                         // desplazamiento X
-    mov x26, -5                          // desplazamiento Y (se incrementa)
+    mov x26, 0                          // desplazamiento Y (se incrementa)
+
+    mov x8, 0 
 
 loop_anim:
 
     mov x0, x20                         // framebuffer
     bl spiderman_img                    // dibuja spiderman en (x25, x26) con soga de x27
+
+    mov x0, x20
+    bl borrar_fondo
 
     // Delay 
     movz x2, 0x02, lsl 16
@@ -31,6 +36,7 @@ loop_anim:
 
     // Actualizar valores
     add x26, x26, 1                    // bajar 1 píxel
+    add x8, x8, 1
 
     cmp x26, 350
     blt loop_anim                      // repetir si no llegó al final
@@ -41,3 +47,35 @@ loop_anim:
     add sp, sp, #24                     // Ajusta SP de vuelta
 
     ret
+
+borrar_fondo:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+    
+    cmp x8, 130
+    blt llamar_borrar_celeste
+
+    cmp x8, 330
+    blt llamar_borrar_violeta
+
+    cmp x8, 450
+    blt llamar_borrar_rosa 
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+llamar_borrar_celeste:
+    bl borrar_celeste
+    ldp x29, x30, [sp], #16
+    ret
+
+llamar_borrar_violeta:
+    bl borrar_violeta
+    ldp x29, x30, [sp], #16
+    ret
+
+llamar_borrar_rosa:
+    bl borrar_rosa
+    ldp x29, x30, [sp], #16
+    ret
+    
