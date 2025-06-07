@@ -618,7 +618,7 @@ graffiti:
 	bl rectangulo_vertical
 
 	mov x1, #584         	//x_inicial
-    mov x2, #327        	/y_inicial
+    mov x2, #327        	//y_inicial
     movz w5, #0x0000, lsl 0
     movk w5, #0x00, lsl 16
 	bl rectangulo_vertical
