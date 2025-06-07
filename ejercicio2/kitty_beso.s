@@ -17,14 +17,6 @@ kitty_beso:
     mov x21, x0                         // Guardar base framebuffer al inicio
 
 	//Limpiar kitty de detrás
-    movz x5, 0x16, lsl 16               // Color Azul oscuro 0x16164B
-    movk x5, 0x164B
-	mov x1, 326                         // x inicial
-	mov x2, 409                         // y inicial
-	mov x3, 20                          // Ancho de la base
-	mov x4, 263                         // Alto
-	mov x6, -1
-	bl dibujar_paralelogramo
 
     movz x5, 0x2F, lsl 16
     movk x5, 0x273E
