@@ -15,6 +15,13 @@
 	.extern sombra
 	.extern farola
 	.extern luz
+	.extern graffiti
+	.extern hello_kitty
+	.extern spiderman_baja
+	.extern spiderman_quieto
+	.extern spiderman_sube
+	.extern kitty_beso
+	.extern animar_ventanas
 
 main:
 
@@ -113,26 +120,6 @@ main:
     mov x4, 280                         // Alto 
     bl dibujar_rectangulo
 
-	// ---------------------- EDIFICIO 2 (DE DETRÁS) ----------------------------
-
-	mov x0, x21                       	// Guarda la dirección base del framebuffer en x0
-	movz w5, 0x1341     		        // Color azul oscuro 
-	movk w5, 0xFF13, lsl 16
-	mov x1, 74                        	// x inicial (columna)
-	mov x2, 0                       	// y inicial (fila)
-	mov x3, 270                     	// Ancho
-	mov x4, 410              			// Alto
-	bl dibujar_rectangulo            	// Llamada función
-
-	//SOMBRA
-    movk x5, 0x16, lsl 16
-    movk x5, 0x164B
-	mov x1, 83                          // x inicial
-	mov x2, 409                         // y inicial
-	mov x3, 263                         // Ancho de la base
-	mov x4, 263                         // Alto
-	mov x6, -1
-	bl dibujar_paralelogramo
 
 	// ---------------------- COLOR BASE EDIFICIO ----------------------------
 
@@ -155,13 +142,13 @@ main:
 	bl edificio_detalle
 
 	mov x0, x21
-	bl edificio2_detalle
-	
-	mov x0, x21
 	bl farola
 
 	mov x0, x21
 	bl ventanas_y_puerta
+
+	mov x0, x21
+	bl graffiti
 anim_loop:
 
 	mov x0, x21
@@ -189,7 +176,6 @@ anim_loop:
 
 	mov x0, x21
 	bl spiderman_sube
-	
 
 InfLoop:
 	b anim_loop

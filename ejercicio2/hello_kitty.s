@@ -33,31 +33,6 @@ hello_kitty:
 	mov x4, 20                 	        // Alto
 	bl dibujar_rectangulo      	        // Llamada función   
 
-    movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1341, lsl 0
-	add x1, x25, 320                    // x inicial (columna)
-	add x2, x26, 390                	// y inicial (fila)
-	mov x3, 40                	        // Ancho
-	mov x4, 30                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-    
-    movz x5, 0x1D, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1D4F, lsl 0
-	add x1, x25, 337                    // x inicial (columna)
-	add x2, x26, 378                	// y inicial (fila)
-	mov x3, 25                	        // Ancho
-	mov x4, 16                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
-    movz x5, 0x1D, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1D4F, lsl 0
-	add x1, x25, 337                    // x inicial (columna)
-	add x2, x26, 396                	// y inicial (fila)
-	mov x3, 25                	        // Ancho
-	mov x4, 16                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
-
 //                     CUERPO 
 
     add x1, x25, #337           // x_inicial
