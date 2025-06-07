@@ -6,7 +6,14 @@
     .global borrar_lila
     .global borrar_violeta
     .global borrar_rosa
-
+    .global borrar_celeste_sube
+    .global borrar_rosa_sube
+    .global borrar_gris_sube
+    .global borrar_violeta_sube
+    .global borrar_celeste_sube2
+    .global borrar_rosa_sube2
+    .global borrar_gris_sube2
+    .global borrar_violeta_sube2
 borrar_celeste:
     stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
     
@@ -137,3 +144,426 @@ borrar_rosa:
     ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
 
     ret
+borrar_gris_sube:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 56
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 40     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 5     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 304  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 5     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 5     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 308  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 5     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 5     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 310  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 5     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x273E, lsl 0
+    movk w5, #0x2F, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_rosa_sube:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+    
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 56
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 60     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 24     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 304  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 24     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 20     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 308  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 20     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 18     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 310  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 18     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_violeta_sube:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+    
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 56
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 60     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 24     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 304  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 24     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 20     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 308  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 20     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 18     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 310  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 18     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_celeste_sube:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+    
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 56
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 60     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 24     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 304  // x_inicial
+    mov x27, x26
+    add x27, x27, 54
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 24     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 20     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 308  // x_inicial
+    mov x27, x26
+    add x27, x27, 52
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 20     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 18     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 310  // x_inicial
+    mov x27, x26
+    add x27, x27, 50
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 18     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_gris_sube2:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 312  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_rosa_sube2:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 312  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x286C, lsl 0
+    movk w5, #0xA6, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_violeta_sube2:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 312  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x4AAA, lsl 0
+    movk w5, #0x4A, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+
+borrar_celeste_sube2:
+    stp x29, x30, [sp, #-16]! // Guarda FP y LR y ajusta SP.
+
+
+    mov x1, 270  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    mov x1, 312  // x_inicial
+    mov x27, x26
+    add x27, x27, 26
+    add x2, xzr, X27   // y_inicial 
+    mov x3, 16     //ancho 
+    mov x4, #2      //alto
+    movz w5, #0x449D, lsl 0
+    movk w5, #0x44, lsl 16
+    bl dibujar_rectangulo
+
+    ldp x29, x30, [sp], #16 // Restaura FP y LR y ajusta SP de vuelta.
+
+    ret
+

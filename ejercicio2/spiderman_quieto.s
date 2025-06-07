@@ -22,39 +22,6 @@ spiderman_quieto:
 
 //Borde
 
-	//Color muro
-
-	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1341, lsl 0
-	add x1, x25, 250                    // x inicial (columna)
-	add x2, x26, 0                	    // y inicial (fila)
-	mov x3, 20                	        // Ancho
-	mov x4, 18                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
-	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1341, lsl 0
-	add x1, x25, 268                    // x inicial (columna)
-	add x2, x26, 0                	    // y inicial (fila)
-	mov x3, 20                	        // Ancho
-	mov x4, 20                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
-	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1341, lsl 0
-	add x1, x25, 256                    // x inicial (columna)
-	add x2, x26, 30                	    // y inicial (fila)
-	mov x3, 6                	        // Ancho
-	mov x4, 6                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
-	movz x5, 0x13, lsl 16     		    // Color Azul 0x131341
-	movk x5, 0x1341, lsl 0
-	add x1, x25, 276                    // x inicial (columna)
-	add x2, x26, 30                	    // y inicial (fila)
-	mov x3, 6                	        // Ancho
-	mov x4, 6                 	        // Alto
-	bl dibujar_rectangulo      	        // Llamada función
 	
 	//Personaje
 	movz x5, 0x0C, lsl 16     		    // Color Negro azulado 0x0C0F1E

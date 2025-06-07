@@ -123,29 +123,10 @@ nubes:
 	movz w5, 0x286C     		        // Color cielo final
 	movk w5, 0x80A6, lsl 16
 	mov x1, 200               	        // x inicial (columna)
-	mov x2, 300                	        // y inicial (fila)
+	mov x2, 289                	        // y inicial (fila)
 	mov x3, 640                	        // Ancho
-	mov x4, 200                         // Alto
+	mov x4, 240                         // Alto
 	bl dibujar_rectangulo      	        // Llamada función
-
-	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
-	movz w5, 0x286C     		        // Color cielo final
-	movk w5, 0x80A6, lsl 16
-	mov x1, 200               	        // x inicial (columna)
-	mov x2, 290                	        // y inicial (fila)
-	mov x3, SCREEN_WIDTH                // Ancho
-	mov x4, 1                           // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
-	mov x0, x21                	        // Guarda la dirección base del framebuffer en x0
-	movz w5, 0x286C     		        // Color cielo final
-	movk w5, 0x80A6, lsl 16
-	mov x1, 200               	        // x inicial (columna)
-	mov x2, 295                	        // y inicial (fila)
-	mov x3, SCREEN_WIDTH                // Ancho
-	mov x4, 3                           // Alto
-	bl dibujar_rectangulo      	        // Llamada función
-
 
 // --------------------- NUBES ROSA FUERTE --------------------
 
